@@ -1,0 +1,301 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Nova Domains - Find a domain for your next big idea.">
+  <title>Nova Domains | Find Your Domain</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #080d19;
+      color: #f8fafc;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 7%;
+      border-bottom: 1px solid #202b40;
+    }
+    .logo { font-size: 23px; font-weight: bold; }
+    .logo span { color: #a78bfa; }
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 18px;
+      font-size: 14px;
+    }
+    .hero {
+      text-align: center;
+      padding: 75px 20px 45px;
+      background: radial-gradient(ellipse at top, #29205c, #080d19 70%);
+    }
+    .tag {
+      color: #c4b5fd;
+      font-size: 12px;
+      letter-spacing: 2px;
+    }
+    h1 { font-size: clamp(34px, 7vw, 58px); margin: 18px 0; }
+    .subtitle {
+      color: #aab6cb;
+      line-height: 1.7;
+      max-width: 530px;
+      margin: 0 auto 28px;
+    }
+    .search {
+      display: flex;
+      gap: 8px;
+      max-width: 620px;
+      margin: auto;
+    }
+    input {
+      min-width: 0;
+      flex: 1;
+      padding: 16px;
+      border: 1px solid #35415a;
+      background: #111a2b;
+      color: white;
+      border-radius: 9px;
+      font-size: 16px;
+    }
+    button {
+      border: 0;
+      border-radius: 9px;
+      padding: 14px 19px;
+      font-weight: bold;
+      cursor: pointer;
+      background: #8b5cf6;
+      color: white;
+    }
+    button:hover { background: #7c3aed; }
+    .note { color: #94a3b8; font-size: 12px; margin-top: 15px; }
+    main { max-width: 900px; margin: auto; padding: 35px 20px; }
+    h2 { font-size: 25px; }
+    .extensions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 25px 0 40px;
+    }
+    .extension, .result, .cart {
+      background: #111a2b;
+      border: 1px solid #26334b;
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .extension strong { font-size: 23px; }
+    .muted { color: #94a3b8; font-size: 13px; }
+    #results { display: grid; gap: 12px; }
+    .result {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    .result button { padding: 11px 14px; }
+    .price { font-weight: bold; margin: 8px 0; }
+    .cart { margin-top: 30px; }
+    #cartItems { line-height: 1.9; overflow-wrap: anywhere; }
+    footer {
+      border-top: 1px solid #202b40;
+      text-align: center;
+      padding: 25px 15px;
+      color: #94a3b8;
+      font-size: 13px;
+    }
+    @media (max-width: 520px) {
+      header { padding: 18px 5%; }
+      nav a { margin-left: 8px; font-size: 12px; }
+      .search { flex-direction: column; }
+      .extensions { grid-template-columns: 1fr; }
+      .result { align-items: flex-start; }
+      .result button { padding: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">Nova <span>Domains.</span></div>
+    <nav>
+      <a href="#search">Search</a>
+      <a href="#prices">Prices</a>
+      <a href="#cart">Cart (<span id="cartCount">0</span>)</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="search">
+    <div class="tag">YOUR IDEA STARTS HERE</div>
+    <h1>Find your place<br>on the internet.</h1>
+    <p class="subtitle">
+      Discover a name for your business, portfolio, startup,
+      or next big idea with Nova Domains.
+    </p>
+
+    <form class="search" id="searchForm">
+      <input id="domainInput" placeholder="Enter a name, e.g. mybrand"
+        aria-label="Domain name" required>
+      <button type="submit">Search domains</button>
+    </form>
+    <p class="note">DEMO MODE — sample results, not live availability.</p>
+  </section>
+
+  <main>
+    <section id="prices">
+      <h2>Choose your domain ending</h2>
+      <p class="muted">Illustrative prices for this demo only.</p>
+      <div class="extensions">
+        <div class="extension">
+          <strong>.com</strong>
+          <p class="muted">For businesses and brands</p>
+          <b>₦12,000 / year*</b>
+        </div>
+        <div class="extension">
+          <strong>.net</strong>
+          <p class="muted">For online services</p>
+          <b>₦15,000 / year*</b>
+        </div>
+        <div class="extension">
+          <strong>.org</strong>
+          <p class="muted">For communities</p>
+          <b>₦14,000 / year*</b>
+        </div>
+      </div>
+      <p class="muted">*Sample prices, not real offers or verified market rates.</p>
+    </section>
+
+    <section>
+      <h2>Domain search results</h2>
+      <p class="muted" id="resultMessage">
+        Enter a name above to see demo suggestions.
+      </p>
+      <div id="results"></div>
+    </section>
+
+    <section class="cart" id="cart">
+      <h2>Your demo cart</h2>
+      <div id="cartItems">Your cart is empty.</div>
+      <p id="cartTotal"><b>Total: ₦0</b></p>
+      <button id="clearCart" type="button">Clear cart</button>
+      <p class="note">
+        Demo only. No payment will be taken and no domain will be registered.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 Nova Domains. Built for your next big idea.
+  </footer>
+
+  <script>
+    const extensions = [
+      { ending: ".com", price: 12000 },
+      { ending: ".net", price: 15000 },
+      { ending: ".org", price: 14000 }
+    ];
+
+    const cart = [];
+
+    const input = document.getElementById("domainInput");
+    const results = document.getElementById("results");
+    const message = document.getElementById("resultMessage");
+
+    function searchDomains(event) {
+      event.preventDefault();
+
+      let name = input.value.trim().toLowerCase();
+
+      // Accept a name or a complete domain name.
+      name = name.replace(/\.(com|net|org)$/i, "");
+
+      // Demo validation: letters, numbers and hyphens only.
+      if (!/^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$/.test(name)) {
+        message.textContent =
+          "Use letters, numbers or internal hyphens. Try another name.";
+        results.replaceChildren();
+        return;
+      }
+
+      results.replaceChildren();
+      message.textContent =
+        "Sample suggestions for " + name + " — availability is not checked.";
+
+      extensions.forEach(function (extension) {
+        const domain = name + extension.ending;
+        const card = document.createElement("div");
+        card.className = "result";
+
+        const details = document.createElement("div");
+        const domainName = document.createElement("strong");
+        domainName.textContent = domain;
+
+        const price = document.createElement("p");
+        price.className = "price";
+        price.textContent =
+          "₦" + extension.price.toLocaleString("en-NG") + " / year*";
+
+        details.append(domainName, price);
+
+        const button = document.createElement("button");
+        button.textContent = "Add to cart";
+        button.type = "button";
+        button.addEventListener("click", function () {
+          addToCart(domain, extension.price);
+        });
+
+        card.append(details, button);
+        results.appendChild(card);
+      });
+    }
+
+    function addToCart(domain, price) {
+      if (cart.some(function (item) {
+        return item.domain === domain;
+      })) {
+        alert("This domain is already in your demo cart.");
+        return;
+      }
+
+      cart.push({ domain: domain, price: price });
+      renderCart();
+    }
+
+    function renderCart() {
+      const container = document.getElementById("cartItems");
+      container.replaceChildren();
+
+      document.getElementById("cartCount").textContent = cart.length;
+
+      if (cart.length === 0) {
+        container.textContent = "Your cart is empty.";
+      } else {
+        cart.forEach(function (item) {
+          const line = document.createElement("div");
+          line.textContent = item.domain + " — ₦" +
+            item.price.toLocaleString("en-NG");
+          container.appendChild(line);
+        });
+      }
+
+      const total = cart.reduce(function (sum, item) {
+        return sum + item.price;
+      }, 0);
+
+      document.getElementById("cartTotal").textContent =
+        "Total: ₦" + total.toLocaleString("en-NG");
+    }
+
+    document.getElementById("searchForm")
+      .addEventListener("submit", searchDomains);
+
+    document.getElementById("clearCart")
+      .addEventListener("click", function () {
+        cart.length = 0;
+        renderCart();
+      });
+  </script>
+</body>
+</html>
